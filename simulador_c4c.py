@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -26,8 +25,13 @@ therapies = {
 st.write("### Asignación de Capital por Terapia")
 allocations = {}
 for therapy in therapies:
-    alloc = st.number_input(f"Inversión en {therapy} (MM USD, máx {therapies[therapy]['max_needed']})",
-                            0.0, therapies[therapy]['max_needed'], 0.0, key=therapy)
+    alloc = st.number_input(
+        f"Inversión en {therapy} (MM USD, máx {therapies[therapy]['max_needed']})",
+        min_value=0.0,
+        max_value=float(therapies[therapy]['max_needed']),
+        value=0.0,
+        key=therapy
+    )
     allocations[therapy] = alloc
 
 # Verificar presupuesto
